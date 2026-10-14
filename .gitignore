@@ -1,0 +1,20 @@
+# Large dataset - do not upload
+dataset/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Local environment secrets
+.env
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
