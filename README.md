@@ -238,7 +238,7 @@ Future work could include:
 ---
 
 <p align="center">
-  <strong>Developed by Sofiya Sanjeev Chavarekar</strong>
+  <strong>Developed by Sofiya Chavarekar</strong>
   <br />
   <a href="https://github.com/SofiyaBioAI">GitHub</a> ·
   <a href="https://www.linkedin.com/in/sofiya-chavarekar/">LinkedIn</a>
