@@ -1,232 +1,217 @@
-# Deep Learning-Based Detection of Pneumonia from Chest X-ray Images Using Explainable AI
+# 🩻 Deep Learning-Based Detection of Pneumonia from Chest X-rays Using Explainable AI
 
 <p align="center">
-
-**A Research Prototype for Chest X-ray Classification and Visual Model Interpretation**
-
+  <strong>An Explainable Deep Learning Framework for Medical Image Classification</strong>
+  <br />
+  Research Project | Bioengineering | Medical Image Analysis
 </p>
 
-## Abstract
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/TensorFlow-Deep%20Learning-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow" />
+  <img src="https://img.shields.io/badge/DenseNet121-Transfer%20Learning-0B7285?style=for-the-badge" alt="DenseNet121" />
+  <img src="https://img.shields.io/badge/Explainable%20AI-Grad--CAM-7950F2?style=for-the-badge" alt="Explainable AI" />
+  <img src="https://img.shields.io/badge/Interface-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
+</p>
 
-Pneumonia is a respiratory infection that can be associated with abnormalities visible in chest radiographs. Deep learning techniques, particularly convolutional neural networks (CNNs), offer a computational approach to identifying image patterns associated with pneumonia. However, model predictions in medical imaging should be interpreted carefully, and understanding which image regions influence a prediction is an important part of model evaluation.
-
-This project develops a deep learning-based framework for binary classification of chest X-ray images into **NORMAL** and **PNEUMONIA** categories. A baseline CNN is implemented and compared with a transfer-learning model based on DenseNet121. Model performance is evaluated using accuracy, precision, recall, F1-score, loss, and a confusion matrix. Gradient-weighted Class Activation Mapping (Grad-CAM) is used to visualize image regions that influence the model's predictions.
-
-The best-performing model in the current evaluation is DenseNet121, which achieved **87.50% test accuracy** on the selected test dataset. The project also includes a Streamlit-based research interface for image upload, prediction visualization, and Grad-CAM inspection.
-
-**Keywords:** Pneumonia classification, chest X-ray, deep learning, CNN, DenseNet121, transfer learning, explainable artificial intelligence, Grad-CAM, medical image analysis.
+<p align="center">
+  <img src="https://img.shields.io/badge/Task-Binary%20Classification-2F855A?style=flat-square" alt="Binary Classification" />
+  <img src="https://img.shields.io/badge/Test%20Accuracy-87.50%25-2F855A?style=flat-square" alt="Test Accuracy" />
+  <img src="https://img.shields.io/badge/Status-Research%20Prototype-6C757D?style=flat-square" alt="Research Prototype" />
+</p>
 
 ---
 
-## 1. Research Objectives
+## 📌 Overview
 
-The primary objectives of this project are:
+Pneumonia is a respiratory infection that can produce abnormalities visible in chest X-ray images. Deep learning offers a way to identify image patterns associated with the disease, but understanding how a model arrives at its predictions is equally important in medical image analysis.
 
-- To develop a deep learning pipeline for classifying chest X-ray images into NORMAL and PNEUMONIA categories.
-- To implement a baseline convolutional neural network for image classification.
-- To investigate transfer learning using a pretrained DenseNet121 architecture.
-- To evaluate and compare the performance of both models using classification metrics.
-- To visualize model-relevant image regions using Grad-CAM.
-- To develop a prototype interface for demonstrating image classification and visual explanations.
-- To document the limitations of the experimental setup and identify directions for future research.
+This project develops a **deep learning pipeline for classifying chest X-ray images as NORMAL or PNEUMONIA**, combining conventional convolutional neural networks with transfer learning and explainable artificial intelligence.
 
-## 2. Methodology
+Two architectures are evaluated: a custom Convolutional Neural Network (CNN) and DenseNet121. Grad-CAM is used to generate visual explanations of model predictions, while a Streamlit interface demonstrates the classification workflow.
 
-The research workflow consists of the following stages:
+The project emphasizes model evaluation, visual interpretability, and responsible reporting of experimental findings.
 
-1. **Dataset acquisition:** Obtain the publicly available chest X-ray dataset.
-2. **Data organization:** Separate images into training, validation, and testing sets.
-3. **Preprocessing:** Resize images to 224 × 224 pixels and prepare them for model input.
-4. **Baseline development:** Implement and train a custom CNN.
-5. **Transfer learning:** Implement DenseNet121 with a classification head.
-6. **Model evaluation:** Evaluate predictions on the held-out test set.
-7. **Explainability:** Generate Grad-CAM heatmaps to visualize image regions influencing predictions.
-8. **Prototype development:** Integrate the trained model into a Streamlit interface.
-9. **Comparative analysis:** Compare model performance and discuss limitations.
+> **Research objective:** Explore whether transfer learning improves chest X-ray classification performance and use Grad-CAM to inspect the image regions influencing model predictions.
 
-### System workflow
+## 📊 Key Results
 
-```text
-Chest X-ray Dataset
-        |
-        v
-Data Organization and Preprocessing
-        |
-        v
-Model Training
-        |
-        +----------------------+
-        |                      |
-        v                      v
-   Baseline CNN           DenseNet121
-        |                      |
-        +----------+-----------+
-                   |
-                   v
-        Held-out Test Evaluation
-                   |
-                   v
-          Confusion Matrix
-          and Classification Metrics
-                   |
-                   v
-              Grad-CAM
-                   |
-                   v
-         Streamlit Demonstration
-```
+<p align="center">
+  <img src="https://img.shields.io/badge/DenseNet121%20Accuracy-87.50%25-198754?style=for-the-badge" alt="DenseNet121 accuracy" />
+  <img src="https://img.shields.io/badge/Weighted%20F1--Score-87.17%25-0B7285?style=for-the-badge" alt="Weighted F1 score" />
+  <img src="https://img.shields.io/badge/Test%20Images-624-6F42C1?style=for-the-badge" alt="Test images" />
+</p>
 
-## 3. Dataset
-
-The project uses the publicly available **Chest X-Ray Images (Pneumonia)** dataset by Paul Mooney on Kaggle.
-
-- **Dataset:** Chest X-Ray Images (Pneumonia)
-- **Source:** [Kaggle Dataset](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)
-- **Original research reference:** Kermany et al. (2018)
-- **Task:** Binary image classification
-- **Classes:** NORMAL and PNEUMONIA
-- **Model input size:** 224 × 224 × 3
-- **Test set size:** 624 images
-
-| Test class | Number of images |
-|---|---:|
-| NORMAL | 234 |
-| PNEUMONIA | 390 |
-| **Total** | **624** |
-
-The test set contains more pneumonia images than normal images. This class imbalance should be considered when interpreting accuracy and other evaluation metrics.
-
-The dataset is intended for research and educational experimentation. Its results should not be assumed to generalize to other hospitals, patient populations, imaging systems, or clinical settings.
-
-## 4. Model Architectures
-
-### 4.1 Baseline CNN
-
-A custom convolutional neural network is used as the baseline model.
-
-The architecture consists of:
-
-- Convolutional layers with 32, 64, and 128 filters
-- ReLU activation
-- Max-pooling layers
-- Flattening
-- A fully connected layer with 128 units
-- Dropout regularization
-- A single sigmoid output for binary classification
-
-The baseline provides a reference point for assessing whether transfer learning improves classification performance.
-
-### 4.2 DenseNet121
-
-DenseNet121 is used as the transfer-learning architecture. DenseNet connects each layer to subsequent layers within a dense block, encouraging feature reuse and improving information flow through the network.
-
-The implemented model consists of:
-
-- A pretrained DenseNet121 feature extractor
-- Global average pooling
-- A fully connected layer with 128 units
-- Dropout regularization
-- A sigmoid output layer
-
-The final model contains approximately **7.17 million parameters**, of which approximately 131,329 are trainable in the saved configuration.
-
-The model was trained using class weighting to account for the unequal representation of classes during training.
-
-**Implementation reference:** [TensorFlow DenseNet121 documentation](https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet121)
-
-## 5. Experimental Results
-
-The following results were obtained from the current held-out test-set evaluation.
-
-### 5.1 Model comparison
-
-| Metric | Baseline CNN | DenseNet121 |
-|---|---:|---:|
+| Evaluation metric | Baseline CNN | DenseNet121 |
+|:--|--:|--:|
 | Test accuracy | 72.92% | **87.50%** |
 | Weighted F1-score | 68.02% | **87.17%** |
 | NORMAL recall | 29.06% | **73.50%** |
 | PNEUMONIA recall | 99.23% | 95.90% |
 | Test loss | 1.5270 | **0.3103** |
 
-DenseNet121 improved test accuracy by **14.58 percentage points** compared with the baseline CNN. It also substantially improved recall for the NORMAL class, indicating more balanced classification performance on this test set.
+**Key observation:** DenseNet121 improved test accuracy by **14.58 percentage points** over the baseline CNN and substantially improved recognition of NORMAL images. However, the model still made both false-positive and false-negative predictions.
 
-The baseline CNN identified most pneumonia cases but misclassified many normal images. DenseNet121 reduced this imbalance, although both false-positive and false-negative predictions remained.
+*Results represent the current evaluation on the selected test set and do not establish clinical performance.*
 
-### 5.2 DenseNet121 classification metrics
+## 🎯 Project Objectives
+
+- Develop a binary chest X-ray classification pipeline.
+- Establish a baseline using a custom CNN.
+- Apply transfer learning using DenseNet121.
+- Compare the models using accuracy, precision, recall, F1-score, loss, and confusion matrices.
+- Apply Grad-CAM to visualize regions influencing model predictions.
+- Develop a Streamlit research interface for interactive demonstration.
+- Identify experimental limitations and potential directions for further research.
+
+## 🧬 Dataset
+
+The project uses the publicly available **Chest X-Ray Images (Pneumonia)** dataset.
+
+| Property | Description |
+|:--|:--|
+| Dataset source | [Kaggle — Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) |
+| Original research | Kermany et al., 2018 |
+| Classification task | Binary classification |
+| Classes | NORMAL, PNEUMONIA |
+| Model input | 224 × 224 × 3 |
+| Test set | 624 images |
+
+### Test-set distribution
+
+| Class | Images |
+|:--|--:|
+| NORMAL | 234 |
+| PNEUMONIA | 390 |
+| **Total** | **624** |
+
+The unequal class distribution is important when interpreting model metrics. Accuracy should therefore be considered alongside class-specific recall, precision, F1-score, and the confusion matrix.
+
+## ⚙️ Methodology
+
+```mermaid
+flowchart TD
+    A["Chest X-ray Dataset"] --> B["Data Organization"]
+    B --> C["Preprocessing and Resizing"]
+    C --> D["Model Development"]
+    D --> E["Baseline CNN"]
+    D --> F["DenseNet121 Transfer Learning"]
+    E --> G["Test-set Evaluation"]
+    F --> G
+    G --> H["Classification Metrics"]
+    G --> I["Confusion Matrix"]
+    G --> J["Grad-CAM Visualization"]
+    H --> K["Comparative Analysis"]
+    I --> K
+    J --> L["Streamlit Research Interface"]
+    K --> L
+```
+
+### 1. Image preprocessing
+
+- Organize images into NORMAL and PNEUMONIA categories.
+- Resize images to 224 × 224 pixels.
+- Prepare images in the format expected by the model.
+- Use training and validation data for model development.
+- Reserve the test set for final evaluation.
+
+### 2. Baseline CNN
+
+The baseline model consists of convolutional layers, ReLU activations, max-pooling, a fully connected layer, dropout regularization, and a sigmoid output layer.
+
+**Purpose:** Establish a reference performance level before applying transfer learning.
+
+### 3. DenseNet121 transfer learning
+
+DenseNet121 uses densely connected convolutional blocks to encourage feature reuse and information flow.
+
+The classification pipeline comprises:
+
+- Pretrained DenseNet121 backbone
+- Global average pooling
+- Dense layer with 128 units
+- Dropout regularization
+- Sigmoid output for binary classification
+
+The saved configuration contains approximately **7.17 million parameters**, including approximately 131,329 trainable parameters.
+
+Class weighting was used during training to account for differences in class representation.
+
+## 📈 Model Evaluation
+
+### DenseNet121 classification report
 
 | Metric | NORMAL | PNEUMONIA |
-|---|---:|---:|
+|:--|--:|--:|
 | Precision | 91.49% | 85.78% |
 | Recall | 73.50% | 95.90% |
 | F1-score | 81.52% | 90.56% |
 | Support | 234 | 390 |
 
-The reported precision, recall, and F1-score are calculated from the current test-set predictions. Precision and recall are class-specific; the overall accuracy alone does not fully describe the model's performance.
+### Confusion matrix
 
-### 5.3 DenseNet121 confusion matrix
+Rows represent actual classes; columns represent predicted classes.
 
-Rows represent actual classes, and columns represent predicted classes.
-
-| Actual class | Predicted NORMAL | Predicted PNEUMONIA |
-|---|---:|---:|
+| Actual / Predicted | NORMAL | PNEUMONIA |
+|:--|--:|--:|
 | NORMAL | 172 | 62 |
 | PNEUMONIA | 16 | 374 |
 
-The confusion matrix indicates 172 correctly classified normal images and 374 correctly classified pneumonia images. The model misclassified 62 normal images as pneumonia and 16 pneumonia images as normal.
+The model correctly classified 172 NORMAL images and 374 PNEUMONIA images. It incorrectly classified 62 NORMAL images as PNEUMONIA and 16 PNEUMONIA images as NORMAL.
 
-These errors are important because a missed pneumonia case and an incorrect pneumonia prediction have different implications in a real clinical setting.
+### Evaluation visualization
 
-### 5.4 Evaluation metrics
+Add the saved confusion matrix to the repository:
 
-- **Accuracy:** Proportion of all test images classified correctly.
-- **Precision:** Proportion of predicted positive cases that are actually positive.
-- **Recall (sensitivity):** Proportion of actual positive cases correctly identified.
-- **F1-score:** Harmonic mean of precision and recall.
-- **Confusion matrix:** Summary of correct and incorrect predictions by class.
-- **Loss:** Quantifies prediction error according to the selected loss function.
+![DenseNet121 Confusion Matrix](results/densenet121_confusion_matrix.png)
 
-For this binary classification task, PNEUMONIA is treated as the positive class when reporting the overall positive-class precision and recall.
+*If the image does not render, verify that the file exists at the specified path and that its filename matches the repository.*
 
-## 6. Explainable AI Using Grad-CAM
+## 🔍 Explainable AI — Grad-CAM
 
-Gradient-weighted Class Activation Mapping (Grad-CAM) is used to produce heatmaps that highlight image regions contributing to a model's prediction.
+**Gradient-weighted Class Activation Mapping (Grad-CAM)** generates a heatmap that highlights image regions contributing to a model's output.
 
-The selected DenseNet121 convolutional layer is:
+The project uses the DenseNet121 convolutional layer:
 
 `conv5_block16_2_conv`
 
-The generated heatmaps are overlaid on the original chest X-ray images to facilitate qualitative inspection.
+Grad-CAM heatmaps are overlaid on chest X-ray images to support qualitative inspection of:
 
-The project includes examples of:
+- Correctly classified PNEUMONIA images
+- Correctly classified NORMAL images
+- Misclassified images
 
-- Correctly classified pneumonia images
-- Correctly classified normal images
-- A misclassified pneumonia image
+### Example visualizations
 
-Grad-CAM provides a visual explanation of model sensitivity, but it does not establish that the model is using medically valid features. Heatmaps should be interpreted as exploratory visualizations rather than proof of clinical reasoning.
+<p align="center">
+  <strong>PNEUMONIA Example</strong>
+  <br />
+  <img src="gradcam/correct_pneumonia_gradcam.png" alt="Grad-CAM visualization for a correctly classified pneumonia example" width="440" />
+</p>
 
-## 7. Streamlit Research Interface
+<p align="center">
+  <strong>NORMAL Example</strong>
+  <br />
+  <img src="gradcam/correct_normal_gradcam.png" alt="Grad-CAM visualization for a correctly classified normal example" width="440" />
+</p>
 
-The project includes a Streamlit prototype intended to demonstrate the trained model.
+Grad-CAM is an exploratory explanation method, not proof that the model relies on clinically valid features. Heatmaps must be interpreted alongside quantitative evaluation and, in future research, expert assessment.
 
-Planned or implemented interface capabilities, depending on the current version of `app.py`, include:
+## 🖥️ Streamlit Demonstration
 
-- Uploading a chest X-ray image in JPG, JPEG, or PNG format
-- Resizing the image to the expected model input dimensions
+The project includes a Streamlit-based research interface for demonstrating the image classification pipeline.
+
+Depending on the current implementation, the interface supports:
+
+- Uploading a chest X-ray image
 - Generating a NORMAL or PNEUMONIA prediction
 - Displaying class probabilities
-- Visualizing a Grad-CAM heatmap
+- Viewing a Grad-CAM heatmap
 - Downloading the generated visualization
 
-The application should display the following disclaimer:
+**Application disclaimer:** `Research Prototype — Not for Clinical Diagnosis.`
 
-> **Research Prototype — Not for Clinical Diagnosis.**
-
-The interface is intended for educational demonstration and research exploration, not as a replacement for medical professionals or validated diagnostic procedures.
-
-## 8. Repository Structure
-
-The expected project structure is:
+## 🗂️ Repository Structure
 
 ```text
 Pneumonia_DeepLearning_Project/
@@ -259,27 +244,27 @@ Pneumonia_DeepLearning_Project/
 └── README.md
 ```
 
-This structure describes the intended repository organization. Include only files that actually exist in your GitHub repository, and update the tree if your implementation differs.
+*This is the intended layout. Update it to match the files actually committed to your repository.*
 
-## 9. Installation and Execution
+## 🚀 Installation and Usage
 
 ### Prerequisites
 
-- Python 3.10 or another Python version supported by the selected TensorFlow release
+- Python version compatible with the selected TensorFlow release
 - pip
 - Git
-- Access to the dataset and trained model files
+- Trained DenseNet121 model checkpoint
 
-### Step 1: Clone the repository
+### 1. Clone the repository
 
-Replace the placeholder below with the actual URL of your GitHub repository.
+Replace the placeholders with your actual GitHub repository details.
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 cd YOUR_REPOSITORY
 ```
 
-### Step 2: Create a virtual environment
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -291,19 +276,19 @@ Activate it on Windows:
 .venv\Scripts\activate
 ```
 
-On Linux or macOS:
+Activate it on Linux or macOS:
 
 ```bash
 source .venv/bin/activate
 ```
 
-### Step 3: Install dependencies
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-A starting `requirements.txt` for the Streamlit interface is:
+Example starting dependencies for the interface:
 
 ```text
 streamlit
@@ -314,96 +299,92 @@ opencv-python-headless
 Pillow
 ```
 
-For reproducible experiments, use compatible, tested dependency versions and pin them in the final requirements file. The versions used to train and evaluate the saved model should be documented separately if they differ from the app environment.
+For reproducible deployment, pin tested package versions in `requirements.txt`.
 
-### Step 4: Configure the model path
+### 4. Check the model path
 
-Ensure that `app.py` loads the saved model from the correct relative path:
+Ensure the application loads the trained model from the correct relative path:
 
-```python
+```text
 models/densenet121_best.keras
 ```
 
-The trained model file must be present locally or obtained through the documented model-download procedure.
+The model checkpoint must be available locally or through a documented download procedure.
 
-### Step 5: Launch the interface
+### 5. Launch the application
 
 ```bash
 streamlit run app.py
 ```
 
-Streamlit will provide a local URL for opening the application in a browser.
+Open the local URL printed in the terminal.
 
-**Note:** The model's preprocessing must match the preprocessing used during training. Before using the interface for a demonstration, verify that image scaling, color conversion, input dimensions, model loading, and Grad-CAM generation work correctly.
+**Important:** Confirm that the application's preprocessing matches the model's training preprocessing before interpreting predictions.
 
-## 10. Reproducibility and Research Considerations
+## 🔬 Reproducibility
 
-To improve reproducibility, future releases of this repository should document:
+For a reproducible research release, document the following:
 
 - Dataset source and version
-- Training, validation, and test split methodology
+- Train, validation, and test split methodology
 - Random seeds
-- Image preprocessing and augmentation settings
+- Image resizing, normalization, and augmentation settings
 - Optimizer, learning rate, batch size, and stopping criteria
 - Model initialization and fine-tuning strategy
 - Class weights and classification threshold
-- Python and library versions
-- Evaluation scripts and model checkpoints
+- Python, TensorFlow, and other dependency versions
+- Evaluation scripts and saved model checkpoints
 
-The reported metrics correspond to the current experiment. They should be independently reproduced before being treated as definitive research findings. The held-out test set should not be used repeatedly to tune the model.
+The test set should remain separate from model tuning to reduce the risk of overly optimistic evaluation.
 
-## 11. Limitations
+## ⚠️ Limitations
 
-1. **Dataset scope:** Evaluation uses a single publicly available dataset.
-2. **Class imbalance:** The test set contains unequal numbers of normal and pneumonia images.
-3. **Generalization:** Performance on external hospitals, devices, and populations has not been established.
-4. **Classification errors:** False-positive and false-negative predictions remain.
-5. **Explainability limitations:** Grad-CAM maps do not prove that predictions are based on clinically meaningful features.
-6. **Clinical validation:** No prospective clinical validation or assessment of clinical utility has been established.
-7. **Dataset bias:** Models may learn dataset-specific artifacts or acquisition-related patterns.
+- Evaluation is based on one publicly available dataset.
+- The test classes are imbalanced.
+- External generalization has not been established.
+- False-positive and false-negative predictions remain.
+- Grad-CAM does not establish clinical validity.
+- Prospective clinical validation has not been performed.
+- Dataset-specific artifacts and biases may influence predictions.
 
-Consequently, the results should be interpreted as experimental machine-learning findings rather than evidence of clinical readiness.
+These limitations mean the results should be considered experimental and educational rather than evidence of readiness for clinical use.
 
-## 12. Future Work
+## 🔮 Future Scope
 
-Potential extensions include:
-
-- External validation using independent chest X-ray datasets
-- Patient-level data splitting and leakage checks
+- External validation on independent datasets
+- Patient-level splitting and data-leakage checks
 - Cross-validation and confidence interval estimation
-- Threshold analysis and calibration of predicted probabilities
-- Evaluation using sensitivity, specificity, ROC-AUC, and precision-recall curves
+- ROC-AUC, specificity, calibration, and precision-recall analysis
 - Comparison with additional pretrained architectures
 - Quantitative evaluation of explanation quality
-- Testing for robustness across acquisition conditions and demographic groups
-- Improved application testing, reproducible deployment, and model-version tracking
+- Robustness and subgroup analysis
+- Model-version tracking and reproducible deployment
 
-## 13. Conclusion
+## 📝 Conclusion
 
-This project presents a research pipeline for pneumonia classification from chest X-ray images using a baseline CNN and transfer learning with DenseNet121. In the current experiment, DenseNet121 achieved 87.50% test accuracy and a weighted F1-score of 87.17%, outperforming the baseline CNN on the selected test set.
+This project demonstrates a deep learning workflow for chest X-ray classification using a baseline CNN and DenseNet121 transfer learning. DenseNet121 achieved **87.50% test accuracy** and a **weighted F1-score of 87.17%** in the current evaluation, outperforming the baseline model on the selected test set.
 
-Grad-CAM was incorporated to support qualitative inspection of image regions associated with model predictions, and a Streamlit interface provides a practical demonstration of the workflow.
+Grad-CAM provides qualitative visualizations of image regions influencing model predictions, while the Streamlit interface demonstrates how classification and explainability can be combined in a research prototype.
 
-The findings illustrate the potential of deep learning for medical image analysis while emphasizing the need for external validation, rigorous experimental design, and careful interpretation before any clinical application.
+Further evaluation on independent datasets and rigorous validation of both predictive performance and explanations are necessary before considering any clinical application.
 
-## 14. References
+## 📚 References
 
-1. G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger, “Densely Connected Convolutional Networks,” *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2017, pp. 4700–4708.
-2. D. S. Kermany et al., “Identifying Medical Diagnoses and Treatable Diseases by Image-Based Deep Learning,” *Cell*, vol. 172, no. 5, pp. 1122–1131.e9, 2018.
-3. P. Rajpurkar et al., “CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning,” arXiv:1711.05225, 2017.
-4. R. R. Selvaraju et al., “Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization,” *Proceedings of the IEEE International Conference on Computer Vision (ICCV)*, 2017, pp. 618–626.
-5. A. Chattopadhay et al., “Grad-CAM++: Generalized Gradient-Based Visual Explanations for Deep Convolutional Networks,” *Proceedings of the IEEE Winter Conference on Applications of Computer Vision (WACV)*, 2018, pp. 839–847.
-6. P. Mooney, “Chest X-Ray Images (Pneumonia),” Kaggle. Available: https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
-7. TensorFlow, “DenseNet121.” Available: https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet121
-8. Streamlit, “Streamlit Documentation.” Available: https://docs.streamlit.io/
+1. Huang, G., Liu, Z., van der Maaten, L., and Weinberger, K. Q. “Densely Connected Convolutional Networks.” *CVPR*, 2017, pp. 4700–4708.
+2. Kermany, D. S. et al. “Identifying Medical Diagnoses and Treatable Diseases by Image-Based Deep Learning.” *Cell*, 172(5), 2018, pp. 1122–1131.e9.
+3. Rajpurkar, P. et al. “CheXNet: Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning.” arXiv:1711.05225, 2017.
+4. Selvaraju, R. R. et al. “Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization.” *ICCV*, 2017, pp. 618–626.
+5. Chattopadhay, A. et al. “Grad-CAM++: Generalized Gradient-Based Visual Explanations for Deep Convolutional Networks.” *WACV*, 2018, pp. 839–847.
+6. Mooney, P. [Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia). Kaggle.
+7. TensorFlow. [DenseNet121 Documentation](https://www.tensorflow.org/api_docs/python/tf/keras/applications/DenseNet121).
+8. Streamlit. [Official Documentation](https://docs.streamlit.io/).
 
 ---
 
-## Disclaimer
-
-This repository is intended for academic research and educational purposes only. It is not a medical device and must not be used to diagnose, treat, or make clinical decisions about any individual. Predictions may be incorrect, and the model has not been established as safe or effective for clinical use.
-
-## Acknowledgements
-
-The authors acknowledge the publicly available chest X-ray dataset, the researchers whose work informed the model architectures and explainability methods, and the academic guidance provided during the project at VIT Bhopal University.
-
+<p align="center">
+  <strong>Academic Research Project · VIT Bhopal University</strong>
+  <br />
+  School of Biosciences Engineering & Technology
+  <br /><br />
+  <em>Research prototype for educational purposes only — not for clinical diagnosis.</em>
+</p>
